@@ -92,25 +92,48 @@ var upperCasedCharacters = [
 function getPasswordOptions() {
 
   // while loop to validate input for password length
+  var passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
+
   while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-    var passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
     console.log(`Password length = ${passwordLength}`);
 
     //alert when generator is cancelled.
-    if (passwordLength === null) {
+    if (passwordLength == false) {
       alert(`Password generation cancelled!`);
-      return null;
+      return false;
     }
+    console.log(passwordLength);
 
     // validation of input
     if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
       alert(`Please enter a valid number between 8-128.`)
-      getPasswordOptions();
+      console.log(passwordLength);
+      passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
     }
   }
 
+  // set variables for each character options
+  var lowercase = confirm("Would you like to lowercase characters?");
+  var uppercase = confirm("Would you like to uppercase characters?");
+  var numeric = confirm("Would you like to numeric characters?");
+  var special = confirm("Would you like to special characters?");
 
+  //if user says no to all, restart function
+  if (!lowercase && !uppercase && !numeric && !special) {
+    alert(`At least one of the character types must be selected.`)
+    return getPasswordOptions();
+  }
+
+  return {
+    passwordLength,
+    lowercase,
+    uppercase,
+    numeric,
+    special
+  }
 }
+
+// console.log(getPasswordOptions());
 
 
 // Function for getting a random element from an array
