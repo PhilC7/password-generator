@@ -124,20 +124,30 @@ function getPasswordOptions() {
     return getPasswordOptions();
   }
 
-  return {
-    passwordLength,
-    lowercase,
-    uppercase,
-    numeric,
-    special
+  //return object of password options
+
+  var passwordOptions = {
+    length: passwordLength,
+    lower: lowercase,
+    upper: uppercase,
+    number: numeric,
+    specialChar: special
   }
+  return passwordOptions;
 }
 
-// console.log(getPasswordOptions());
+console.log(getPasswordOptions());
 
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+
+}
+
+
+//function to create new array from chosen options
+
+function selectedOptions() {
 
 }
 
