@@ -92,17 +92,15 @@ var upperCasedCharacters = [
 function getPasswordOptions() {
 
   // while loop to validate input for password length
-  var passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
+  var passwordLength = parseInt(prompt(`Select password length. (Must be between 8-128 characters).`));
 
   while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-    console.log(`Password length = ${passwordLength}`);
 
     //alert when generator is cancelled.
     if (passwordLength == false) {
       alert(`Password generation cancelled!`);
       return false;
     }
-    console.log(passwordLength);
 
     // validation of input
     if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
@@ -136,8 +134,6 @@ function getPasswordOptions() {
   return passwordOptions;
 }
 
-console.log(getPasswordOptions());
-
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -146,57 +142,56 @@ function getRandom(arr) {
   return randomEl;
 }
 
-
-//function to create new array from chosen options
-
-function selectedOptions() {
-
-}
-
 // Function to generate password with user input
 function generatePassword() {
-  var options = getPasswordOptions;
+  var options = getPasswordOptions();
 
-  //set value for new array or options
-  var charOptions = [];
+  // if (!options) {
+  //   return ""; // Return an empty string if options are not valid
+  // }
 
-  //variable for set password
+  var possibleCharacters = [];
   var generatedPassword = "";
 
-  //add selected characters to new array
-  if (options.upper) {
-    charOptions = charOptions.concat(upperCasedCharacters);
-  }
-  if (options.lower) {
-    charOptions = charOptions.concat(lowerCasedCharacters);
-  }
-  if (options.number) {
-    charOptions = charOptions.concat(numericCharacters);
-  }
+  // Add selected character types to the possible characters array
   if (options.specialChar) {
-    charOptions = charOptions.concat(specialCharacters);
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
   }
 
-  //generate new password
+  if (options.number) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+  }
+
+  if (options.lower) {
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+  }
+
+  if (options.upper) {
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+  }
+
+  // Generate the password
   for (var i = 0; i < options.length; i++) {
-    var randomCharacter = getRandom(charOptions)
+    var randomCharacter = getRandom(possibleCharacters);
     generatedPassword += randomCharacter;
   }
 
+  return generatedPassword;
 }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
-
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword); //change back to writePassword once all functions are made
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
+  console.log(passwordText.value);
 }
+
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
 
 
