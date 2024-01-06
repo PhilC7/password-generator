@@ -155,6 +155,33 @@ function selectedOptions() {
 
 // Function to generate password with user input
 function generatePassword() {
+  var options = getPasswordOptions;
+
+  //set value for new array or options
+  var charOptions = [];
+
+  //variable for set password
+  var generatedPassword = "";
+
+  //add selected characters to new array
+  if (options.upper) {
+    charOptions = charOptions.concat(upperCasedCharacters);
+  }
+  if (options.lower) {
+    charOptions = charOptions.concat(lowerCasedCharacters);
+  }
+  if (options.number) {
+    charOptions = charOptions.concat(numericCharacters);
+  }
+  if (options.specialChar) {
+    charOptions = charOptions.concat(specialCharacters);
+  }
+
+  //generate new password
+  for (var i = 0; i < options.length; i++) {
+    var randomCharacter = getRandom(charOptions)
+    generatedPassword += randomCharacter;
+  }
 
 }
 
@@ -162,7 +189,7 @@ function generatePassword() {
 var generateBtn = document.querySelector('#generate');
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', getPasswordOptions); //change back to writePassword once all functions are made
+generateBtn.addEventListener('click', writePassword); //change back to writePassword once all functions are made
 
 // Write password to the #password input
 function writePassword() {
