@@ -91,7 +91,27 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
 
+  // while loop to validate input for password length
+  while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+    var passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
+    console.log(`Password length = ${passwordLength}`);
+
+    //alert when generator is cancelled.
+    if (passwordLength === null) {
+      alert(`Password generation cancelled!`);
+      return null;
+    }
+
+    // validation of input
+    if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+      alert(`Please enter a valid number between 8-128.`)
+      getPasswordOptions();
+    }
+  }
+
+
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -106,6 +126,9 @@ function generatePassword() {
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
+// Add event listener to generate button
+generateBtn.addEventListener('click', getPasswordOptions); //change back to writePassword once all functions are made
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -114,5 +137,4 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+

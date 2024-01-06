@@ -1,0 +1,34 @@
+PASSWORD GENERATOR
+
+On click of generate password button...
+
+1 - getPasswordOptions function.
+    a - Ask user what length password they would like. (use confirm method)
+        i - set conditional to check if choice is within 8-128.
+        (while selection is not a number/over 128/under 8, alert it is incorrect then ask again for input).
+
+        ii - if cancelled - alert generation of password is cancelled.
+
+    b - Ask if they want lowercase characters.
+        i - if yes, add to new array. if no, don't add.
+
+        ii - Repeat for uppercase, numerical and special characters.
+
+        iii - Alert at least 1 selection must be included if all
+    
+    c - return 
+
+
+
+
+Generate a password when the button is clicked
+Present a series of prompts for password criteria
+Length of password
+At least 8 characters but no more than 128.
+Character types
+Lowercase
+Uppercase
+Numeric
+Special characters ($@%&*, etc)
+Code should validate for each input and at least one character type should be selected
+Once prompts are answered then the password should be generated and displayed in an alert or written to the page
