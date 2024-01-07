@@ -108,7 +108,7 @@ function getPasswordOptions() {
     if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
       alert(`Please enter a valid number between 8-128.`)
       console.log(passwordLength);
-      passwordLength = prompt(`Select password length. (Must be between 8-128 characters).`);
+      passwordLength = parseInt(prompt(`Select password length. (Must be between 8-128 characters).`));
     }
   }
 
