@@ -91,22 +91,24 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
 
+  var passwordLength = prompt(`Select password length. (Must be between 8-128 characters).`);
+
   // while loop to validate input for password length
-  var passwordLength = parseInt(prompt(`Select password length. (Must be between 8-128 characters).`));
-
   while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-
+    console.log(passwordLength)
     //alert when generator is cancelled.
-    if (passwordLength == false) {
+    if (passwordLength === null) {
       alert(`Password generation cancelled!`);
-      return false;
+      console.log('generation cancelled');
+      return;
     }
 
+    parseInt(passwordLength)
     // validation of input
     if (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
       alert(`Please enter a valid number between 8-128.`)
       console.log(passwordLength);
-      passwordLength = Number(prompt(`Select password length. (Must be between 8-128 characters).`));
+      passwordLength = prompt(`Select password length. (Must be between 8-128 characters).`);
     }
   }
 
@@ -123,7 +125,6 @@ function getPasswordOptions() {
   }
 
   //return object of password options
-
   var passwordOptions = {
     length: passwordLength,
     lower: lowercase,
@@ -146,11 +147,14 @@ function getRandom(arr) {
 function generatePassword() {
   var options = getPasswordOptions();
 
-  // if (!options) {
-  //   return ""; // Return an empty string if options are not valid
-  // }
+  if (!options) {
+    return ""; // Return an empty string if options are not valid
+  }
 
+  //new array for selected characters
   var possibleCharacters = [];
+
+  //variable with empty string for password to be added to
   var generatedPassword = "";
 
   // Add selected character types to the possible characters array
